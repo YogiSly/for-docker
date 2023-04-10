@@ -1,0 +1,59 @@
+1.
+docker pull node:15.14
+15.14: Pulling from library/node
+bfde2ec33fbc: Already exists
+787f5e2f1047: Already exists
+7b6173a10eb8: Already exists
+dc05be471d51: Already exists
+55fab5cadd3c: Already exists
+bd821d20ef8c: Already exists
+6041b69671c6: Already exists
+989c5d2d2313: Already exists
+4b57d41e8391: Already exists
+Digest: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+Status: Downloaded newer image for node:15.14
+docker.io/library/node:15.14
+
+
+2.
+docker run --name first_name -v %cd%data:/var/first/data -i -d node:15.14          
+d0dc72b6eb44a8fdf2a0857805fc459695383ce7d9ea13b5576c8dd970bd76f5
+
+
+3.
+docker run --name second_name -v %cd%data:/var/second/data -i -d node:15.14
+75744b1efd2dba5eb005026b1ee700ec1cbf4d798bc5f31dea7e0d5d02217424
+
+
+4.
+docker exec -it first_name touch /var/first/data/test.txt
+
+
+5.
+docker exec -it first_name touch /var/first/data/two.txt
+
+
+6.
+docker exec -it second_name ls /var/second/data 
+test.txt  two.txt
+
+
+7.
+docker stop first_name
+first_name
+docker stop second_name
+second_name
+
+
+8.
+docker rm first_name
+first_name
+docker rm second_name
+second_name
+
+
+9.
+docker rmi -f node:15.14 
+Untagged: node:15.14
+Untagged: node@sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+Deleted: sha256:3d3f41722daf1a77c34d6eade6676bbffa2d6a2a21095de2ab0c427a5c942fc9
